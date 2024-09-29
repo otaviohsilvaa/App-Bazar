@@ -1,0 +1,71 @@
+{
+  "restaurants": [
+    { 
+      "id": "1", 
+      "name": "KFC", 
+      "image": "https://i.imgur.com/sZ1Jye3.png"
+    },
+    { 
+      "id": "2", 
+      "name": "McDonald's", 
+      "image": "https://i.imgur.com/su4iB3p.png"
+    },
+    { 
+      "id": "3", 
+      "name": "Outback", 
+      "image": "https://i.imgur.com/jg3GJVN.png"
+    },
+    { 
+      "id": "4", 
+      "name": "Sushi Dev", 
+      "image": "https://i.imgur.com/ffYWFBX.png"
+    },
+    { 
+      "id": "5", 
+      "name": "Burguer Grill", 
+      "image": "https://i.imgur.com/kmQvG2T.png"
+    },
+    { 
+      "id": "6", 
+      "name": "Marmitas express", 
+      "image": "https://i.imgur.com/uXRuDFD.png"
+    }
+  ],
+  "foods": [
+    { 
+      "id": "1", 
+      "name": "Redmi Note 12 Novo", 
+      "price": 500,
+      "description": "Vendo celular usado novo bateria boa confia brabo demais seloco 8gb de ram muito bom em bom estado",
+      "image": "https://imgur.com/0Zomtxz.png"
+    },
+    { 
+      "id": "2", 
+      "name": "RX 6600 com defeito, mas boa", 
+      "price": 600,
+      "description": "Vendo celular usado novo bateria boa confia brabo demais seloco 8gb de ram muito bom em bom estado",
+      "image": "https://imgur.com/GH1typw.png"
+    },
+    { 
+      "id": "3", 
+      "name": "Cueca que não uso mais", 
+      "price": 10,
+      "description": "Vendo celular usado novo bateria boa confia brabo demais seloco 8gb de ram muito bom em bom estado",
+      "image": "https://imgur.com/bpDBfiN.png"
+    },
+    { 
+      "id": "4", 
+      "name": "Vendo cama box casal, nova", 
+      "price": 1.200,
+      "description": "Vendo celular usado novo bateria boa confia brabo demais seloco 8gb de ram muito bom em bom estado",
+      "image": "https://imgur.com/AbVayJp.png"
+    },
+    { 
+      "id": "5", 
+      "name": "Boneco Homem Aranha lacrado na caixa", 
+      "price": 150,
+      "description": "Vendo celular usado novo bateria boa confia brabo demais seloco 8gb de ram muito bom em bom estado",
+      "image": "https://imgur.com/undefined.png"
+    }
+  ]
+}
