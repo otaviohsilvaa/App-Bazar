@@ -11,7 +11,6 @@ export default function ProductLayout() {
       headerTintColor: "#FFFFFF",
       title: ''
   }}>
-      {/* Aqui você pode definir outras configurações se necessário */}
     </Stack>
   );
 }

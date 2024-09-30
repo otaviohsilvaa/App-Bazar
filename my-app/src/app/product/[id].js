@@ -2,6 +2,7 @@ import { View, StyleSheet, Text, StatusBar, ScrollView, Image } from 'react-nati
 import { useLocalSearchParams } from "expo-router";
 
 export default function product() {
+  //Função recebe os parâmetros passados pelo card do produto
   const {id, name, price, description, image } = useLocalSearchParams();
  return (
   <ScrollView 
