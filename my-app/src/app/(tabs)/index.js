@@ -8,7 +8,7 @@ const statusBarHeight = Constants.statusBarHeight;
 
 export default function () {
     return(
-        <SafeAreaView 
+        <ScrollView 
         style={{flex: 1}} 
         className="bg-slate-50" 
         showsVerticalScrollIndicator={false}
@@ -29,7 +29,7 @@ export default function () {
 
         </View>
         
-        </SafeAreaView>
+        </ScrollView>
         
     )
 }

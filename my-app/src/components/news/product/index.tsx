@@ -1,12 +1,30 @@
 import { View, Pressable, Text, Image } from 'react-native';
 import { ProductProps } from "..";
 import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from 'expo-router';
 
 export function CardProduct({product}: {product: ProductProps }) {
+
+  const router = useRouter();
+
+  const handlePress = () => {
+    // Navega para a página do produto e passa as informações do produto
+    router.push({
+      pathname: '../../product/[id]',
+      params: { 
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        description: product.description,
+        image: product.image
+       },
+    });
+  };
+
  return (
   //Card do produto
     <Pressable 
-    onPress={() => console.log("Ir para a pagina do produto")} //Adicionar ação de enviar as informações do produto para a outra página
+    onPress={handlePress} //Adicionar ação de enviar as informações do produto para a outra página
     style={{}} className='flex flex-row rounded-xl gap-3 border border-gray-400'>
     <Image //Imagem do produto
     source={{ uri: product.image }}
@@ -32,7 +50,7 @@ export function CardProduct({product}: {product: ProductProps }) {
 
         <View className='flex flex-row items-center justify-start pb-2'>
           <Text className='text-2xl opacity-30'>Por: </Text>
-        <Text className='font-medium text-2xl' style={{color: '#30A851'}}>R$ {product.price}</Text>
+        <Text className='font-normal text-2xl' style={{color: '#30A851'}}>R$ {product.price}</Text>
         </View>
         
 

@@ -8,7 +8,9 @@ export default function profileScreen() {
     <Link href={'/user/myproducts'}>Meus produtos</Link>
     <Link href={'/user/newproduct'}>Novo Produto</Link>
     <Link href={'/user/userinfo'}>Meu Perfil</Link>
-    <Button title='Login' onPress={() => router.push('/auth/login')} />
+    
+    {/* Botões para auxiliar no front da tela de login e cadastro */}
+    <Button title='Login' onPress={() => router.push('/auth/login')} /> 
     <Button title='Cadastro' onPress={() => router.push('/auth/signup')} />
    </View>
   );

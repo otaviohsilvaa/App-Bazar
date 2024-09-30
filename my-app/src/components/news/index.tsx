@@ -8,17 +8,16 @@ export interface ProductProps{
   id: string;
   name: string;
   price: number;
-  time: string;
-  delivery: string;
-  rating: number;
+  description: string;
   image: string;
-  restaurantId: string;
+
 }
 
-// Capturando os produtos da API
+// Capturando os produtos da API fake (db.json)
 export function NewsProducts() {
   const [product, setProducts] = useState<ProductProps[]>([])
 
+  //Verificar o endereço IPV4 no cmd e atualizar antes dos 2 pontos(:)
   useEffect(() => {
     async function getProducts() {
       const response = await fetch("http://192.168.1.10:3000/foods")
@@ -31,12 +30,11 @@ export function NewsProducts() {
 
  return (
   //Listagem de todos os produtos da API
-  <FlatList
-   data={product}
-   renderItem={ ({item}) => <CardProduct product={item}/>}
-   contentContainerStyle={{gap: 14}}
-   showsVerticalScrollIndicator={false}
-   />
+  <View className=' flex-1 w-full h-full mb-11 gap-4 drop-shadow-2xl'>
+    {product.map( product => (
+      <CardProduct product={product} key={product.id}/>
+    ))}
+  </View>
  
    
   );

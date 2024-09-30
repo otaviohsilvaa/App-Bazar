@@ -14,9 +14,9 @@ export function Header() {
 
       </View>
 
-      <View className='flex flex-row pt-4 gap-1'>
+      <View className='flex flex-row pt-4 gap-1 mb-5'>
         <Feather name='map-pin' size={17} color='#3B3B3D'/>
-        <Text className='text-lg font-bold'>Caxias - MA</Text>
+        <Text className='text-lg font-bold '>Caxias - MA</Text>
       </View>
 
     </View>
