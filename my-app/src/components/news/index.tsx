@@ -20,7 +20,7 @@ export function NewsProducts() {
   //Verificar o endereço IPV4 no cmd e atualizar antes dos 2 pontos(:)
   useEffect(() => {
     async function getProducts() {
-      const response = await fetch("http://192.168.1.10:3000/products")
+      const response = await fetch("http://192.168.1.3:3000/products")
       const data = await response.json()
       setProducts(data);
     }
