@@ -1,34 +1,41 @@
-import { Text, View, StatusBar , StyleSheet, Image, TextInput, Pressable } from 'react-native';
+import { Text, View, StatusBar , StyleSheet, Image, TextInput, Pressable, ScrollView } from 'react-native';
 import React from 'react';
 
 export default function myProducts() {
   return (
-    <View style={styles.container}>
-      <View style={styles.profileContainer}>
-        <Image style={styles.profileImage} source={{ uri: 'https://as1.ftcdn.net/v2/jpg/04/81/85/46/1000_F_481854656_gHGTnBscKXpFEgVTwAT4DL4NXXNhDKU9.jpg' }} />
-      </View>
-      
-      <View style={styles.containerTwo}>
-        <TextInput style={styles.textInputSmall} placeholder='Fabio'/>
-        <TextInput style={styles.textInputSmall} placeholder='Ferreira'/>
-      </View>
+    <ScrollView
+    style={{flex: 1}} 
+    className="bg-slate-50" 
+    showsVerticalScrollIndicator={false}>
 
-      <View style={styles.teste}>
-        <View style={styles.containerInformations}>
-          <TextInput style={styles.TextInput} placeholder='fabiozika@gmail.com'/>
-          <TextInput style={styles.TextInput} placeholder='123.456.789.10'/>
-          <TextInput style={styles.TextInput} placeholder="(99)9998877-16655"/>
-          <Pressable>
-            <Text style={styles.TextInput}>Nova senha</Text>
-            <Text style={styles.TextInput}>Confirme a senha</Text>
-          </Pressable>
+      <View style={styles.container}>
+        <View style={styles.profileContainer}>
+          <Image style={styles.profileImage} source={{ uri: 'https://as1.ftcdn.net/v2/jpg/04/81/85/46/1000_F_481854656_gHGTnBscKXpFEgVTwAT4DL4NXXNhDKU9.jpg' }} />
         </View>
-      </View>
+      
+        <View style={styles.containerTwo}>
+          <TextInput style={styles.textInputSmall} placeholder='Fabio'/>
+          <TextInput style={styles.textInputSmall} placeholder='Ferreira'/>
+        </View>
 
-      <Pressable style={styles.formButton} onPress={() => alert('Alterações salvas')}>
-        <Text style={styles.textButton}>Salvar</Text>
-      </Pressable>
-    </View>
+        <View style={styles.teste}>
+          <View style={styles.containerInformations}>
+            <TextInput style={styles.TextInput} placeholder='fabiozika@gmail.com'/>
+            <TextInput style={styles.TextInput} placeholder='123.456.789.10'/>
+            <TextInput style={styles.TextInput} placeholder="(99)9998877-16655"/>
+            <Pressable>
+              <Text style={styles.TextInput}>Nova senha</Text>
+              <Text style={styles.TextInput}>Confirme a senha</Text>
+            </Pressable>
+          </View>
+        </View>
+
+        <Pressable style={styles.formButton} onPress={() => alert('Alterações salvas')}>
+          <Text style={styles.textButton}>Salvar</Text>
+        </Pressable>
+      </View>
+    </ScrollView>
+    
   );
 }
 
@@ -78,11 +85,11 @@ const styles = StyleSheet.create({
     color:'#979797',
   },
   formButton: {
-    padding: 15,
+    padding: 9,
     backgroundColor: '#014BDB',
     borderRadius: 10,
     alignItems: 'center',
-    width: '70%', // O botão preenche 70% da página
+    width: '50%', // O botão preenche 70% da página
   },
   textButton: {
     color: 'white',

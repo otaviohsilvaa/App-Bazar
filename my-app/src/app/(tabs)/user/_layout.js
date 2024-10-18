@@ -9,8 +9,8 @@ export default function UserLayout() {
         headerTintColor: "#FFFFFF"
     }}>
       <Stack.Screen name="index" options={{ title: 'Perfil', headerShown: false}} />
-      <Stack.Screen name="myproducts" options={{ title: 'Meus Produtos' }} />
-      <Stack.Screen name="newproduct" options={{ title: 'Novo Produto' }} />
+      <Stack.Screen name="myproducts" options={{ title: '' }} />
+      <Stack.Screen name="newproduct" options={{ title: '' }} />
       <Stack.Screen name="userinfo" options={{ title: 'Informações' }} />
     </Stack>
   );

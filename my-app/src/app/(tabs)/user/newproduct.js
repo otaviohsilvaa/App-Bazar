@@ -1,11 +1,15 @@
-import { StatusBar, Button, TextInput, Text, View, StyleSheet, Pressable  } from 'react-native';
+import { StatusBar, Button, TextInput, Text, View, StyleSheet, Pressable, ScrollView  } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 
 
 export default function newProduct() {
  return (
-  
-      <View style={styles.container}>
+  <ScrollView
+    style={{flex: 1}} 
+    className="bg-slate-50" 
+    showsVerticalScrollIndicator={false}>
+
+    <View style={styles.container}>
         
         <Text style={styles.title}>Inserir Produto</Text>
   
@@ -51,6 +55,9 @@ export default function newProduct() {
         
         
       </View>
+  </ScrollView>
+
+      
     );
   }
   
@@ -94,11 +101,11 @@ export default function newProduct() {
       height: 40,
     },
     formButton: {
-      padding: 15,
+      padding: 9,
       backgroundColor: '#014BDB',
       borderRadius: 10,
       alignItems: 'center',
-      width: '70%', // O botão preenche 70% da página
+      width: '60%', // O botão preenche 70% da página
     },
     textButton: {
       color: 'white',

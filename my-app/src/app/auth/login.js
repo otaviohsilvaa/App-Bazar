@@ -1,6 +1,7 @@
 import { StyleSheet, View, Text, TextInput, Pressable } from 'react-native';
 import React from 'react';
-import { Ionicons, Feather } from "@expo/vector-icons";
+import { router } from 'expo-router';
+import { Ionicons, Feather} from "@expo/vector-icons";
 
 export default function LoginScreen() {
   return (
@@ -34,7 +35,7 @@ export default function LoginScreen() {
         </Pressable>
 
         {/* Botão de "Cadastre-se" com texto azul */}
-        <Pressable style={styles.blueBorderInput} onPress={() => alert('Cadastre-se Pressionado')}>
+        <Pressable style={styles.blueBorderInput} onPress={() => router.push('/auth/signup')}>
           <Text style={styles.blueTextButton}>Cadastre-se</Text>
         </Pressable>
 

@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text, StatusBar, ScrollView, Image, TouchableOpacity  } from 'react-native';
+import { View, StyleSheet, Text, StatusBar, ScrollView, Image, TouchableOpacity, Pressable  } from 'react-native';
 import React, { useState } from 'react';
 import { useLocalSearchParams } from "expo-router";
 import { Ionicons } from '@expo/vector-icons';
@@ -68,10 +68,11 @@ export default function product() {
   </ScrollView>
 
   <View style={styles.footer}>
-    <TouchableOpacity className=' flex-row tems-center justify-center bg-blue-800 p-3 rounded-2xl w-3/5 gap-2'>
+    <Pressable className=' flex-row tems-center justify-center bg-blue-800 p-3 rounded-2xl w-3/5 gap-2'
+    onPress={() => alert('Encaminhou para o Whatsapp do vendedor')}>
       <Text className='text-white font-extrabold text-2xl'>Comprar</Text>
       <Ionicons className='mt-1' name='logo-whatsapp' size={24} color={'#FFFF'}/>
-    </TouchableOpacity>
+    </Pressable>
   </View>
 
   </View>
