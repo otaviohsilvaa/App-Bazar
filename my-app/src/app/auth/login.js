@@ -1,23 +1,41 @@
-import { StyleSheet, View, Text, TextInput, Pressable } from 'react-native';
-import React from 'react';
+import { StyleSheet, View, Text, TextInput, Pressable, Alert } from 'react-native';
+import React, { useState } from 'react';
 import { router } from 'expo-router';
-import { Ionicons, Feather} from "@expo/vector-icons";
+import { Ionicons, Feather } from "@expo/vector-icons";
+import axios from 'axios';
+import { IP_BASE } from '../ip';
 
 export default function LoginScreen() {
+  const [emailUsuario, setEmailUsuario] = useState('');
+  const [senhaUsuario, setSenhaUsuario] = useState('');
+
+  const handleSubmit = () => {
+    axios.post(`${IP_BASE}/login`, { emailUsuario, senhaUsuario })
+      .then(response => {
+        Alert.alert(response.data.message);
+        
+        if (response.data.success) { 
+          router.replace('/');
+        }
+      })
+      .catch(error => {
+        Alert.alert('Credenciais inválidas');
+      });
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.formTitle}>Entre em sua conta</Text>
 
       {/* Campo de e-mail com ícone de cartinha */}
       <View style={styles.inputContainer}>
-        <TextInput style={styles.formInput} placeholder='E-mail' />
+        <TextInput style={styles.formInput} placeholder='E-mail' value={emailUsuario} onChangeText={setEmailUsuario} />
         <Ionicons name="mail-outline" size={24} color="#014BDB" style={styles.icon} />
       </View>
 
       {/* Campo de senha com ícone de cadeado */}
       <View style={styles.inputContainer}>
-        
-        <TextInput style={styles.formInput} placeholder='Senha' secureTextEntry={true}/>
+        <TextInput style={styles.formInput} placeholder='Senha' value={senhaUsuario} onChangeText={setSenhaUsuario} secureTextEntry={true} />
         <Feather name="lock" size={24} color="#014BDB" style={styles.icon} />
       </View>
 
@@ -30,7 +48,7 @@ export default function LoginScreen() {
 
       <View style={styles.bottomInputsContainer}>
         {/* Botão de "Entrar" */}
-        <Pressable style={styles.blueInput} onPress={() => alert('Entrar Pressionado')}>
+        <Pressable style={styles.blueInput} onPress={handleSubmit}>
           <Text style={styles.textButton}>Entrar</Text>
         </Pressable>
 
