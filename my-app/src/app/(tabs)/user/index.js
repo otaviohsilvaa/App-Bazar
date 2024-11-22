@@ -1,60 +1,119 @@
-import { Link, router } from 'expo-router';
+import React, { useEffect, useState } from 'react';
+import { Link, router, useFocusEffect } from 'expo-router';
 import { Text, View, Button, Image, StyleSheet } from 'react-native';
-import { Ionicons, AntDesign,FontAwesome6} from "@expo/vector-icons";
+import { Ionicons, AntDesign, FontAwesome6 } from "@expo/vector-icons";
+import axios from 'axios';
+import { IP_BASE } from './../../../config/ip';
 
 export default function ProfileScreen() {
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [userName, setUserName] = useState('');
+  const [userCelular, setUserCelular] = useState('');
+  const [userImage, setUserImage] = useState(null); 
+
+  const checkLoginStatus = async () => {
+    try {
+      const response = await fetch(`${IP_BASE}/is_logged_in`);
+      const data = await response.json();
+      if (data.logged_in) {
+        setLoggedIn(true);
+        setUserName(data.user);
+        setUserCelular(data.celular);
+        setUserImage(data.foto_perfil);
+                
+      } else {
+        setLoggedIn(false);
+        setUserName('');
+        setUserCelular('');
+        setUserImage(null);
+      }
+    } catch (error) {
+      console.error('Erro ao verificar o login:', error);
+    }
+  };
+
+  useEffect(() => {
+    checkLoginStatus();
+  }, []);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      checkLoginStatus();
+    }, [])
+  );
+
   return (
-    <View style={styles.containerOne}>    
-      <View style={styles.profileContainer}>
-        <View style={styles.profileContent}>
-          {/* Foto  */}
-          <Image
-            style={styles.profileImage}
-            source={{ uri: 'https://as1.ftcdn.net/v2/jpg/04/81/85/46/1000_F_481854656_gHGTnBscKXpFEgVTwAT4DL4NXXNhDKU9.jpg' }} 
-          />
-          {/* Informações de perfil */}
-          <View style={styles.profileInfoContainer}>
-            <Text style={styles.profileName}>Fábio Ferreira</Text>
-            <Text style={styles.profileInfo}>(99) 99999-9999</Text>
-            <Text style={styles.profileInfo}>Caxias</Text>
+    <View style={styles.containerOne}>
+      {loggedIn ? (
+        <>
+          <View style={styles.profileContainer}>
+            <View style={styles.profileContent}>
+              {/* Foto de Perfil */}
+              <Image
+                style={styles.profileImage}
+                source={{ uri: userImage }} 
+              />
+              {/* Informações de perfil */}
+              <View style={styles.profileInfoContainer}>
+                <Text style={styles.profileName}>{userName}</Text>
+                <Text style={styles.profileInfo}>{userCelular}</Text>
+                <Text style={styles.profileInfo}>Caxias</Text>
+              </View>
+            </View>
           </View>
-        </View>
-      </View>
 
-      
-      <View style={styles.containerTwo}>
-      {/* MEUS PRODUTOS */}
-      <View style={styles.navRow}>
-        <FontAwesome6 name="shop" size={24} color="#1C1C1C" />
-        <Link href={'/user/myproducts'} style={styles.link}>Meus produtos</Link>
-        <AntDesign name="right" size={24} color="#1C1C1C" />
-      </View>
+          <View style={styles.containerTwo}>
+            {/* Navegação */}
+            <View style={styles.navRow}>
+              <FontAwesome6 name="shop" size={24} color="#1C1C1C" />
+              <Link href={'/user/myproducts'} style={styles.link}>Meus produtos</Link>
+              <AntDesign name="right" size={24} color="#1C1C1C" />
+            </View>
 
-      {/* NOVO PRODUTO */}
-      <View style={styles.navRow}>
-        <AntDesign name="pluscircleo" size={24} color="#1C1C1C" />
-        <Link href={'/user/newproduct'} style={styles.link}>Novo Produto</Link>
-        <AntDesign name="right" size={24} color="#1C1C1C" />
-      </View>
+            <View style={styles.navRow}>
+              <AntDesign name="pluscircleo" size={24} color="#1C1C1C" />
+              <Link href={'/user/newproduct'} style={styles.link}>Novo Produto</Link>
+              <AntDesign name="right" size={24} color="#1C1C1C" />
+            </View>
 
-      {/* MEU PERFIL */}
-      <View style={styles.navRow}>
-        <Ionicons name="person-outline" size={24} color="#1C1C1C" />
-        <Link href={'/user/userinfo'} style={styles.link}>Meu Perfil</Link>
-        <AntDesign name="right" size={24} color="#1C1C1C" />
-      </View>
+            <View style={styles.navRow}>
+              <Ionicons name="person-outline" size={24} color="#1C1C1C" />
+              <Link href={'/user/userinfo'} style={styles.link}>Meu Perfil</Link>
+              <AntDesign name="right" size={24} color="#1C1C1C" />
+            </View>
 
-      {/* SUPORTE */}
-      <View style={styles.navRow}>
-        <Ionicons name="person-outline" size={24} color="#1C1C1C" />
-        <Link href={'/user/userinfo'} style={styles.link}>Suporte</Link>
-        <AntDesign name="right" size={24} color="#1C1C1C" />
-      </View>
-    </View>
-    
-      {/*login e cadastro */}
-      <Button title='Login' onPress={() => router.push('/auth/login')} />
-      <Button title='Cadastro' onPress={() => router.push('/auth/signup')} />
+            <View style={styles.navRow}>
+              <Ionicons name="person-outline" size={24} color="#1C1C1C" />
+              <Link href={'/user/userinfo'} style={styles.link}>Suporte</Link>
+              <AntDesign name="right" size={24} color="#1C1C1C" />
+            </View>
+          </View>
+
+          <Button
+            title="Logout"
+            onPress={async () => {
+              try {
+                const response = await axios.post(`${IP_BASE}/logout`);
+                if (response.status === 200) {
+                  setLoggedIn(false);
+                  setUserName('');
+                  setUserCelular('');
+                  setUserImage(null);
+                } else {
+                  console.error("Erro no logout:", response.data.message);
+                }
+              } catch (error) {
+                console.error("Erro ao fazer logout:", error);
+              }
+            }}
+          />
+        </>
+      ) : (
+        <>
+          <Button title="Login" onPress={() => router.push('/auth/login')} />
+          <Button title="Cadastro" onPress={() => router.push('/auth/signup')} />
+        </>
+      )}
     </View>
   );
 }
@@ -101,27 +160,21 @@ const styles = StyleSheet.create({
     color: '#666',
     marginBottom: 5,
   },
-
-
-  containerTwo:{
-    width:'100%',
-     padding:20,
-    
+  containerTwo: {
+    width: '100%',
+    padding: 20,
   },
   navRow: {
     flexDirection: 'row', 
     alignItems: 'center',
     justifyContent: 'space-between', 
     marginBottom: 20, 
-    
-     
   },
-  link:{
+  link: {
     fontWeight: 'normal',
-    fontSize:18,
-     color: '#1C1C1C',
+    fontSize: 18,
+    color: '#1C1C1C',
     flex: 1,
     marginHorizontal: 10,
-    
   },
 });

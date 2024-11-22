@@ -31,6 +31,8 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "sdkVersion": "52.0.0",
+    "newArchEnabled": true
   }
 }
