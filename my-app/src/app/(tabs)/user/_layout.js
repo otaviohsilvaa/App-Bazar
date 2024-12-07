@@ -12,6 +12,7 @@ export default function UserLayout() {
       <Stack.Screen name="myproducts" options={{ title: '' }} />
       <Stack.Screen name="newproduct" options={{ title: '' }} />
       <Stack.Screen name="userinfo" options={{ title: 'Informações' }} />
+      <Stack.Screen name="Login" options={{ headerShown: false}} />
     </Stack>
   );
 }

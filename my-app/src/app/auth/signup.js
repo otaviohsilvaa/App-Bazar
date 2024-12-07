@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, TextInput, Pressable, Alert, Image, Button, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, TextInput, Pressable, Alert, Image, ScrollView } from 'react-native';
 import React, { useState } from 'react';
 import { Ionicons, Feather } from '@expo/vector-icons';
 import axios from 'axios';
@@ -32,12 +32,9 @@ export default function CadastroScreen() {
 
   const handleSubmit = async () => {
     if (!profileImage) {
-      console.error('Nenhuma imagem selecionada');
       Alert.alert('Selecione uma imagem de perfil!');
       return;
-    }else{
-      Alert.alert('Deu certo')
-    };
+    }
 
     try {
       const response = await axios.post(`${IP_BASE}/cadastro`, {
@@ -48,7 +45,6 @@ export default function CadastroScreen() {
         senhaUsuario,
         profile_image: profileImage,
       });
-      
       
       if (response.status === 201) {
         Alert.alert(response.data.message);
@@ -64,49 +60,60 @@ export default function CadastroScreen() {
   return (
     <ScrollView>
       <View style={styles.container}>
-      <Text style={styles.formTitle}>Realize seu cadastro</Text>
+        <Text style={styles.formTitle}>Realize seu cadastro</Text>
 
-      {/* Campo de Nome com ícone de pessoa */}
-      <View style={styles.inputContainer}>
-        <TextInput style={styles.formInput} placeholder="Nome" value={nomeUsuario} onChangeText={setNomeUsuario} />
-        <Ionicons name="person-outline" size={24} color="#045CF1B2" style={styles.icon} />
-      </View>      
+        {/* Campo de Nome */}
+        <View style={styles.inputContainer}>
+          <TextInput style={styles.formInput} placeholder="Nome" value={nomeUsuario} onChangeText={setNomeUsuario} />
+          <Ionicons name="person-outline" size={24} color="#045CF1B2" style={styles.icon} />
+        </View>      
 
-      {/* Campo de CPF com ícone de documento */}
-      <View style={styles.inputContainer}>
-        <TextInput style={styles.formInput} placeholder="CPF" value={cpfUsuario} onChangeText={setCpfUsuario} />
-        <Ionicons name="document-text-outline" size={24} color="#045CF1B2" style={styles.icon} />
+        {/* Campo de CPF */}
+        <View style={styles.inputContainer}>
+          <TextInput style={styles.formInput} placeholder="CPF" value={cpfUsuario} onChangeText={setCpfUsuario} />
+          <Ionicons name="document-text-outline" size={24} color="#045CF1B2" style={styles.icon} />
+        </View>
+
+        {/* Campo de Celular */}
+        <View style={styles.inputContainer}>        
+          <TextInput style={styles.formInput} placeholder="Celular" value={celularUsuario} onChangeText={setCelularUsuario} />
+          <Feather name="phone" size={24} color="#045CF1B2" style={styles.icon} />
+        </View>
+
+        {/* Campo de E-mail */}
+        <View style={styles.inputContainer}>        
+          <TextInput style={styles.formInput} placeholder="E-mail" value={emailUsuario} onChangeText={setEmailUsuario} />
+          <Ionicons name="mail-outline" size={24} color="#045CF1B2" style={styles.icon} />
+        </View>
+
+        {/* Campo de Senha */}
+        <View style={styles.inputContainer}>        
+          <TextInput style={styles.formInput} placeholder="Senha" value={senhaUsuario} onChangeText={setSenhaUsuario} secureTextEntry={true} />
+          <Ionicons name="key-outline" size={24} color="#045CF1B2" style={styles.icon} />
+        </View>
+
+        {/* Botão para selecionar imagem de perfil */}
+        <Pressable style={styles.imageButton} onPress={pickImage}>
+          <Text style={styles.imageButtonText}>Selecionar Imagem de Perfil</Text>
+        </Pressable>
+
+        {/* Pré-visualização da Imagem */}
+        {profileImage && (
+          <Image 
+            source={{ uri: profileImage }} 
+            style={styles.profileImage} 
+          />
+        )}
+
+        {/* Botão de enviar */}
+        <Pressable style={styles.formButton} onPress={handleSubmit}>
+          <Text style={styles.textButton}>Cadastrar</Text>
+        </Pressable>
+
+        <View style={styles.spaceAfterButton}></View>
+
       </View>
-
-      {/* Campo de Celular com ícone de telefone */}
-      <View style={styles.inputContainer}>        
-        <TextInput style={styles.formInput} placeholder="Celular" value={celularUsuario} onChangeText={setCelularUsuario} />
-        <Feather name="phone" size={24} color="#045CF1B2" style={styles.icon} />
-      </View>
-
-      {/* Campo de E-mail com ícone de caixa de mensagem */}
-      <View style={styles.inputContainer}>        
-        <TextInput style={styles.formInput} placeholder="E-mail" value={emailUsuario} onChangeText={setEmailUsuario} />
-        <Ionicons name="mail-outline" size={24} color="#045CF1B2" style={styles.icon} />
-      </View>
-
-      {/* Campo de Senha com ícone de chave */}
-      <View style={styles.inputContainer}>        
-        <TextInput style={styles.formInput} placeholder="Senha" value={senhaUsuario} onChangeText={setSenhaUsuario} secureTextEntry={true} />
-        <Ionicons name="key-outline" size={24} color="#045CF1B2" style={styles.icon} />
-      </View>
-
-      {/* Botão para selecionar imagem de perfil */}
-      <Button title="Selecionar Imagem de Perfil" onPress={pickImage} />
-      {profileImage && <Image source={{ uri: profileImage }} style={{ width: 100, height: 100, marginVertical: 10 }} />}
-
-      {/* Botão de enviar */}
-      <Pressable style={styles.formButton} onPress={handleSubmit}>
-        <Text style={styles.textButton}>Cadastrar</Text>
-      </Pressable>
-    </View>
     </ScrollView>
-    
   );
 }
 
@@ -140,6 +147,25 @@ const styles = StyleSheet.create({
     flex: 1,  
     fontSize: 18,
   },
+  imageButton: {
+    backgroundColor: '#0284C7',
+    padding: 10,
+    marginVertical: 15,
+    borderRadius: 10,
+    alignItems: 'center',
+    width: '80%',
+  },
+  imageButtonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  profileImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    marginVertical: 15,
+  },
   formButton: {
     backgroundColor: '#014BDB',
     width: '80%',
@@ -153,4 +179,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
+  spaceAfterButton: {
+    height: 30, // Espaço de 30 pixels
+  },  
 });

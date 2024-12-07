@@ -87,26 +87,30 @@ export default function ProfileScreen() {
               <Link href={'/user/userinfo'} style={styles.link}>Suporte</Link>
               <AntDesign name="right" size={24} color="#1C1C1C" />
             </View>
+            <View style={styles.navRow}>
+              <Ionicons name="log-out-outline" size={25} color="#1C1C1C" />
+              <Text style={styles.link}
+              onPress={async () => {
+                try {
+                  const response = await axios.post(`${IP_BASE}/logout`);
+                  if (response.status === 200) {
+                    setLoggedIn(false);
+                    setUserName('');
+                    setUserCelular('');
+                    setUserImage(null);
+                  } else {
+                    console.error("Erro no logout:", response.data.message);
+                  }
+                } catch (error) {
+                  console.error("Erro ao fazer logout:", error);
+                }
+              }}
+              >Logout</Text>
+              <AntDesign name="right" size={25} color="#1C1C1C" />
+            </View>
           </View>
 
-          <Button
-            title="Logout"
-            onPress={async () => {
-              try {
-                const response = await axios.post(`${IP_BASE}/logout`);
-                if (response.status === 200) {
-                  setLoggedIn(false);
-                  setUserName('');
-                  setUserCelular('');
-                  setUserImage(null);
-                } else {
-                  console.error("Erro no logout:", response.data.message);
-                }
-              } catch (error) {
-                console.error("Erro ao fazer logout:", error);
-              }
-            }}
-          />
+          
         </>
       ) : (
         <>
